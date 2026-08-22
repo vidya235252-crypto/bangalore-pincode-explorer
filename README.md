@@ -1,124 +1,128 @@
 # Bangalore Pincode Explorer
 
-## Overview
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?logo=javascript&logoColor=black)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-Bangalore Pincode Explorer is a full-stack web app that lets you enter a 6-digit
-Bangalore/Bengaluru pincode and instantly see the area/post-office name, district,
-and state associated with it. It's built with a lightweight vanilla JS frontend and
-a small FastAPI backend backed by a local, verified dataset — no external APIs or
-databases required.
+A full-stack web app that resolves any Bangalore/Bengaluru pincode to its
+area, district, and state — instantly, with a REST API backing a clean,
+dependency-free frontend.
+
+**Live locally in under a minute:** clone → `pip install` → `uvicorn` →
+open `index.html`. No database, no build step, no external API calls.
+
+---
+
+## Why this project
+
+Most "pincode lookup" demos either hit a slow third-party API or ship a
+tangled jQuery + PHP stack. This one is intentionally minimal and
+production-shaped instead: a typed FastAPI service with real validation
+and status codes, a static frontend that talks to it over a clean REST
+contract, and a small, verified dataset that makes the whole thing run
+completely offline.
 
 ## Features
 
-- Search any 6-digit Bangalore pincode and see matching area(s)
-- Handles pincodes that map to multiple areas (e.g. `560001`)
-- Real-time input validation (digits only, 6-digit length)
-- Distinct UI states: initial, loading, success, invalid input, not found, server error
-- Popular pincode shortcuts and a "recent searches" list (persisted with `localStorage`)
-- Copy-to-clipboard button on each result
-- Fully responsive layout (desktop, tablet, mobile)
-- REST API with interactive Swagger docs at `/docs`
+- Lookup by 6-digit pincode, with all matching areas returned (some
+  pincodes map to more than one locality, e.g. `560001`)
+- Server-side validation with correct HTTP semantics (`200` / `400` /
+  `404` / `500`)
+- Distinct, clearly-designed UI states: initial, loading, success,
+  invalid input, not found, and server error
+- Popular-pincode shortcuts and a persisted "recent searches" list
+  (`localStorage`)
+- One-click copy of a pincode from any result card
+- Fully responsive layout — desktop, tablet, and mobile
+- Interactive API documentation via FastAPI's auto-generated Swagger UI
 
 ## Tech Stack
 
-**Frontend**
-- HTML5
-- CSS3
-- Vanilla JavaScript (no frameworks, no build step)
-
-**Backend**
-- Python 3
-- FastAPI
-- Uvicorn
-- Pydantic
-- JSON (local dataset, no database)
+| Layer      | Technology                              |
+|------------|------------------------------------------|
+| Frontend   | HTML5, CSS3, Vanilla JavaScript (no framework, no build step) |
+| Backend    | Python 3, FastAPI, Uvicorn, Pydantic     |
+| Data       | Local JSON dataset (no database required) |
 
 ## Architecture
 
 ```text
 Browser
-   ↓
-Vanilla JavaScript (fetch API)
-   ↓
-FastAPI REST API  (CORS enabled)
-   ↓
-backend/data/pincodes.json  (local dataset)
+   │  fetch()
+   ▼
+Vanilla JavaScript          (frontend/)
+   │  GET /api/pincodes/{pincode}
+   ▼
+FastAPI REST API             (backend/main.py, CORS enabled)
+   │
+   ▼
+backend/data/pincodes.json   (verified Bangalore pincode dataset)
 ```
 
-The frontend is a static site that talks to the FastAPI backend over HTTP using
-the Fetch API. The backend loads the pincode dataset once at startup and serves
-lookups from memory — there is no external network dependency at runtime.
+The frontend is a static site — it never talks to anything but the
+FastAPI service. The backend loads the dataset once at startup and
+serves every lookup from memory, so there's zero runtime dependency on
+an external network.
 
 ## Project Structure
 
 ```text
 bangalore-pincode-explorer/
-│
 ├── frontend/
 │   ├── index.html      # page structure & UI states
 │   ├── style.css        # postmark-inspired responsive design
 │   └── script.js         # fetch calls, validation, state handling
-│
 ├── backend/
 │   ├── main.py                # FastAPI app & routes
 │   ├── requirements.txt
 │   └── data/
 │       └── pincodes.json      # verified Bangalore pincode dataset (32 entries)
-│
 ├── .gitignore
 └── README.md
 ```
 
 ## Getting Started
 
-### Backend
+### 1. Run the backend
 
 ```bash
 cd backend
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate      # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-The API will be available at `http://localhost:8000`.
-Interactive API docs: `http://localhost:8000/docs`
+API: `http://localhost:8000` · Interactive docs: `http://localhost:8000/docs`
 
-### Frontend
+### 2. Run the frontend
 
-In a separate terminal:
+In a second terminal:
 
 ```bash
 cd frontend
 python -m http.server 5500
 ```
 
-Then open `http://localhost:5500` in your browser.
+Open `http://localhost:5500` in your browser. The frontend calls the
+API at `http://localhost:8000` — make sure the backend is running first.
 
-> The frontend calls the API at `http://localhost:8000` (see `API_BASE` in
-> `script.js`). Make sure the backend is running first.
-
-## API Documentation
+## API Reference
 
 ### `GET /api/health`
 
-Health check.
-
-**Response `200`**
 ```json
 { "status": "ok" }
 ```
 
 ### `GET /api/pincodes/{pincode}`
 
-Look up a Bangalore pincode.
-
-**Example request**
 ```text
 GET /api/pincodes/560034
 ```
 
-**Response `200`**
+**`200 OK`**
 ```json
 {
   "pincode": "560034",
@@ -128,48 +132,50 @@ GET /api/pincodes/560034
 }
 ```
 
-**Response `400`** — malformed pincode (not exactly 6 digits)
+**`400 Bad Request`** — pincode isn't exactly 6 numeric digits
 ```json
 { "detail": "Invalid pincode. Please provide exactly 6 numeric digits." }
 ```
 
-**Response `404`** — well-formed pincode with no matching record
+**`404 Not Found`** — well-formed pincode with no dataset match
 ```json
 { "detail": "No Bangalore area found for pincode 560999." }
 ```
 
-**Response `500`** — unexpected server error
+**`500 Internal Server Error`** — unexpected server-side failure
 ```json
 { "detail": "Unexpected server error: <message>" }
 ```
 
 ## Error Handling
 
-- **Frontend**: input is restricted to digits as you type; the search button and
-  Enter key are both wired to the same validated search flow. Network failures,
-  4xx, and 5xx responses each map to a distinct, clearly worded UI state.
-- **Backend**: the pincode path parameter is validated to be exactly 6 numeric
-  digits before any lookup happens (`400` otherwise). A valid-format pincode with
-  no dataset match returns `404`. Any unexpected failure while reading the dataset
-  is caught and returned as `500` rather than crashing the process.
+- **Frontend** — input is restricted to digits as you type; Enter and the
+  Search button both route through the same validated search flow.
+  Network failures and every 4xx/5xx response map to a distinct, clearly
+  worded UI state, so the user is never left guessing.
+- **Backend** — the pincode path parameter is validated to be exactly 6
+  numeric digits before any lookup runs. A valid-format pincode with no
+  match returns `404`; any unexpected failure is caught and returned as
+  `500` instead of crashing the process.
 
 ## Data Source
 
-The dataset in `backend/data/pincodes.json` contains 32 real Bangalore/Bengaluru
-pincode records, cross-checked against public postal-code references (including
-India Post-derived directories and Wikipedia locality infoboxes) for areas such as
-Indiranagar, Koramangala, Jayanagar, JP Nagar, Whitefield, Electronic City, HSR
-Layout, Rajajinagar, Malleswaram, Yelahanka, Hebbal, Marathahalli, Banashankari,
-Basavanagudi, Shivajinagar, MG Road, Richmond Town, Frazer Town, Domlur, and
-Bellandur, among others. No pincode-to-area mapping was invented.
+`backend/data/pincodes.json` contains 32 real Bangalore/Bengaluru
+pincode records, cross-checked against public postal-code references
+(India Post-derived directories and Wikipedia locality data), covering
+areas including Indiranagar, Koramangala, Jayanagar, JP Nagar,
+Whitefield, Electronic City, HSR Layout, Rajajinagar, Malleswaram,
+Yelahanka, Hebbal, Marathahalli, Banashankari, Basavanagudi,
+Shivajinagar, MG Road, Richmond Town, Frazer Town, Domlur, and
+Bellandur. No pincode-to-area mapping in this dataset was invented.
 
 ## Future Improvements
 
-- Expand the dataset to cover all ~300+ Bangalore pincodes
+- Expand coverage to all ~300+ Bangalore pincodes
 - Add reverse search (area name → pincode)
-- Add pincode-to-coordinates mapping and a map view
-- Add basic automated tests (pytest for the API, a small JS test harness)
-- Add a lightweight rate limiter if the API were ever made public
+- Add a map view using pincode-to-coordinates data
+- Add automated tests (`pytest` for the API, a small JS test harness)
+- Add basic rate limiting if the API were ever deployed publicly
 
 ## License
 
