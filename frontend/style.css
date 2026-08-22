@@ -1,10 +1,3 @@
-/* ============================================================
-   Bangalore Pincode Explorer
-   Design concept: an India-Post postmark / postage-stamp motif.
-   Palette: garden green (nod to Bangalore's "Garden City"), warm
-   sand paper background, postmark-ink vermilion accent, brass gold.
-   ============================================================ */
-
 :root {
   --green-950: #142e22;
   --green-800: #1f4a37;
@@ -54,8 +47,6 @@ body {
   padding: 48px 20px 32px;
 }
 
-/* ---------------- Header ---------------- */
-
 .header {
   text-align: center;
   margin-bottom: 36px;
@@ -76,8 +67,6 @@ body {
   margin: 0;
 }
 
-/* ---------------- Search card (postage-stamp motif) ---------------- */
-
 .search-card {
   position: relative;
   background: var(--sand-100);
@@ -85,8 +74,7 @@ body {
   border-radius: 14px;
   padding: 26px 28px 22px;
   margin-bottom: 32px;
-  /* perforated stamp edge, created with radial gradients */
-  --notch: radial-gradient(circle at 8px 8px, transparent 7px, var(--sand-50) 7.5px);
+    --notch: radial-gradient(circle at 8px 8px, transparent 7px, var(--sand-50) 7.5px);
   box-shadow: 0 1px 0 rgba(20, 46, 34, 0.04);
 }
 
@@ -176,8 +164,6 @@ body {
   color: var(--text-muted);
 }
 
-/* ---------------- Result states ---------------- */
-
 .results {
   min-height: 90px;
   margin-bottom: 36px;
@@ -235,8 +221,6 @@ body {
   background: transparent;
   padding: 0;
 }
-
-/* Result cards, styled like a rubber postmark stamped on paper */
 
 .result-cards {
   display: grid;
@@ -319,8 +303,6 @@ body {
   background: rgba(31, 74, 55, 0.08);
 }
 
-/* ---------------- Popular / Recent chips ---------------- */
-
 .popular h2,
 .recent h2 {
   font-family: var(--serif);
@@ -354,16 +336,12 @@ body {
   background: var(--sand-200);
 }
 
-/* ---------------- Footer ---------------- */
-
 .footer {
   text-align: center;
   color: var(--text-muted);
   font-size: 0.82rem;
   margin-top: 12px;
 }
-
-/* ---------------- Responsive ---------------- */
 
 @media (max-width: 520px) {
   .page {
@@ -393,8 +371,6 @@ body {
     height: 56px;
   }
 }
-
-/* ---------------- Accessibility ---------------- */
 
 button:focus-visible,
 input:focus-visible,
