@@ -1,0 +1,100 @@
+{
+  "560001": [
+    { "name": "Bangalore GPO", "district": "Bangalore Urban", "state": "Karnataka" },
+    { "name": "MG Road", "district": "Bangalore Urban", "state": "Karnataka" },
+    { "name": "Cubbon Road", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560003": [
+    { "name": "Malleswaram", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560004": [
+    { "name": "Basavanagudi", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560005": [
+    { "name": "Frazer Town", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560010": [
+    { "name": "Rajajinagar", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560011": [
+    { "name": "Jayanagar 3rd Block", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560012": [
+    { "name": "Indian Institute of Science (IISc)", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560022": [
+    { "name": "Yeshwantpur", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560023": [
+    { "name": "Bangalore City (Majestic)", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560024": [
+    { "name": "Hebbal", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560025": [
+    { "name": "Richmond Town", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560032": [
+    { "name": "RT Nagar", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560034": [
+    { "name": "Koramangala", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560037": [
+    { "name": "Marathahalli", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560038": [
+    { "name": "Indiranagar", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560040": [
+    { "name": "Vijayanagar", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560041": [
+    { "name": "Jayanagar East", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560050": [
+    { "name": "Banashankari", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560051": [
+    { "name": "Shivajinagar", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560060": [
+    { "name": "Kengeri", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560064": [
+    { "name": "Yelahanka", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560066": [
+    { "name": "Whitefield", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560069": [
+    { "name": "Jayanagar South", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560071": [
+    { "name": "Domlur", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560072": [
+    { "name": "Nagarbhavi", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560076": [
+    { "name": "BTM Layout", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560078": [
+    { "name": "JP Nagar", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560093": [
+    { "name": "C.V. Raman Nagar", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560095": [
+    { "name": "Koramangala 6th Block", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560100": [
+    { "name": "Electronic City", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560102": [
+    { "name": "HSR Layout", "district": "Bangalore Urban", "state": "Karnataka" }
+  ],
+  "560103": [
+    { "name": "Bellandur", "district": "Bangalore Urban", "state": "Karnataka" }
+  ]
+}

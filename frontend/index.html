@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bangalore Pincode Explorer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1>Bangalore Pincode Explorer</h1>
+      <p class="subtitle">Quickly discover Bangalore areas using a pincode.</p>
+    </header>
+
+    <main class="main">
+      <section class="search-card" aria-label="Pincode search">
+        <label for="pincode-input" class="search-label">Enter Bangalore Pincode</label>
+        <div class="search-row">
+          <input
+            id="pincode-input"
+            type="text"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            maxlength="6"
+            placeholder="e.g. 560001"
+            autocomplete="off"
+          />
+          <button id="search-btn" type="button">Search</button>
+          <button id="clear-btn" type="button" class="secondary-btn" hidden>Clear</button>
+        </div>
+        <p id="input-hint" class="hint"></p>
+      </section>
+
+      <section id="results" class="results" aria-live="polite">
+        <div id="state-initial" class="state-panel">
+          <p>Enter a Bangalore pincode to discover its area.</p>
+        </div>
+
+        <div id="state-loading" class="state-panel" hidden>
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Looking up pincode…</p>
+        </div>
+
+        <div id="state-invalid" class="state-panel state-error" hidden>
+          <p>Please enter a valid 6-digit pincode.</p>
+        </div>
+
+        <div id="state-notfound" class="state-panel state-error" hidden>
+          <p>We couldn't find a Bangalore area for this pincode.</p>
+        </div>
+
+        <div id="state-servererror" class="state-panel state-error" hidden>
+          <p>Something went wrong while contacting the server. Please try again.</p>
+        </div>
+
+        <div id="state-success" class="state-panel state-success" hidden>
+          <div id="result-cards" class="result-cards"></div>
+        </div>
+      </section>
+
+      <section id="popular" class="popular">
+        <h2>Popular Bangalore pincodes</h2>
+        <div id="popular-chips" class="chips"></div>
+      </section>
+
+      <section id="recent" class="recent" hidden>
+        <h2>Recent searches</h2>
+        <div id="recent-chips" class="chips"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Data served from a local FastAPI backend &middot; <span id="index-count"></span></p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
