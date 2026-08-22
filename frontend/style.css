@@ -196,7 +196,7 @@ body {
   margin: 0;
 }
 
-#state-loading {
+#state-loading:not([hidden]) {
   display: flex;
   align-items: center;
   justify-content: center;
