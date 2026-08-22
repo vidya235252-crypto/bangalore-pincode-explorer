@@ -74,9 +74,7 @@
               btn.textContent = original;
             }, 1200);
           })
-          .catch(() => {
-            /* clipboard not available; silently ignore */
-          });
+          .catch(() => {});
       });
     });
   }
@@ -124,7 +122,6 @@
       return;
     }
 
-    // 500 or any other unexpected status
     showState("servererror");
   }
 
@@ -133,7 +130,6 @@
   }
 
   function handleInputChange() {
-    // Strip non-digits as the user types.
     const digitsOnly = els.input.value.replace(/[^0-9]/g, "").slice(0, 6);
     els.input.value = digitsOnly;
 
@@ -177,9 +173,7 @@
       recents.unshift(pincode);
       recents = recents.slice(0, MAX_RECENT);
       localStorage.setItem(RECENT_KEY, JSON.stringify(recents));
-    } catch (err) {
-      /* localStorage unavailable; skip persistence */
-    }
+    } catch (err) {}
   }
 
   function renderChipRow(container, pincodes) {
@@ -209,7 +203,6 @@
   }
 
   async function loadIndexCount() {
-    // Best-effort: use a known pincode call is unnecessary; just show static note.
     els.indexCount.textContent = "verified Bangalore pincode dataset";
   }
 
